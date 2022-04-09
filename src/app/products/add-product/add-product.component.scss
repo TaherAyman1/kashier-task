@@ -1,19 +1,29 @@
-.form{
-    min-width: 320px;
-    max-width: 600px;
+.form {
+  min-width: 320px;
+  max-width: 600px;
 
-      .btns{
-          text-align: right;
-          .add{
-            background: #00BCB4;
-            border-radius: 5px;
-            color:#fff
-          }
+  .btns-container {
+    display: flex;
+
+    .btns-right {
+      width: 100%;
+      justify-content: flex-start;
+      .add {
+        background: #00bcb4;
+        border-radius: 5px;
+        color: #fff;
       }
-
-
-      .half-screen{
-        width: 48%;
     }
+    .btn-left {
+      width: 100%;
+      justify-content: flex-end;
+      .btn {
+        color: red;
+      }
+    }
+  }
 
+  .half-screen {
+    width: 48%;
+  }
 }

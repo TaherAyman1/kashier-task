@@ -8,47 +8,35 @@ import { ProductsService } from '../products.service';
   styleUrls: ['./all-products.component.scss']
 })
 export class AllProductsComponent implements OnInit {
-  productName:string='';
-  ShowSuccessMessage=false;
-  products:any =[
-    {name:'a'},
-    {name:'b'}
-  ];
-  filteredProducts:any = [];
-  constructor(private router :Router,private productServices :ProductsService){
+  productName: string = '';
+  ShowSuccessMessage = false;
+  filteredProducts: any = [];
+  products: any;
+  constructor(private router: Router, private productServices: ProductsService) {
 
   }
   ngOnInit() {
-  this.productServices.$product.subscribe(res=>{
-    console.log(this.products);
-    
-    if(res){
-      this.products.push({name:res})
-      this.showMessage()
-    }
-   
-    
-  })
-     this.filteredProducts =this.products
+    this.productServices.$products.subscribe((res: any) => {
+      this.products = res;
+      this.filteredProducts = this.products;
+    })
+
   }
-
-
-  showMessage(){
-    this.ShowSuccessMessage=true
-    setTimeout(() => {
-      this.ShowSuccessMessage =false
-    }, 3000);
-  }
-
   searchProduct() {
-    
-    this.filteredProducts = this.products.filter((res:any) => 
-       res.name.toLowerCase().match(this.productName.toLowerCase())
-    )
-}
 
-addProduct(){
-this.router.navigateByUrl('/add')
-}
+    this.filteredProducts = this.products.filter((res: any) =>
+      res.name.toLowerCase().match(this.productName.toLowerCase())
+    )
+  }
+
+  addProduct() {
+    this.router.navigateByUrl('/add');
+  }
+
+  directToProductDetails(product: any) {
+    this.productServices.$product.next(product);
+    this.productServices.$editProduct.next('edit');
+    this.router.navigate(['/add']);
+  }
 
 }
