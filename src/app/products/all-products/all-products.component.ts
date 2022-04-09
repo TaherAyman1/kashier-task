@@ -30,13 +30,13 @@ export class AllProductsComponent implements OnInit {
   }
 
   addProduct() {
-    this.router.navigateByUrl('/add');
+    this.router.navigateByUrl('/add-edit');
   }
 
   directToProductDetails(product: any) {
     this.productServices.$product.next(product);
     this.productServices.$editProduct.next('edit');
-    this.router.navigate(['/add']);
+    this.router.navigate(['/add-edit']);
   }
 
 }

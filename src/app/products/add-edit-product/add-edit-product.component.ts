@@ -5,14 +5,12 @@ import { ProductsService } from '../products.service';
 import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
 
-
-
 @Component({
-  selector: 'app-add-product',
-  templateUrl: './add-product.component.html',
-  styleUrls: ['./add-product.component.scss']
+  selector: 'app-add-edit-product',
+  templateUrl: './add-edit-product.component.html',
+  styleUrls: ['./add-edit-product.component.scss']
 })
-export class AddProductComponent implements OnInit, OnDestroy {
+export class AddEditProductComponent implements OnInit, OnDestroy {
 
   productForm = new FormGroup({
     name: new FormControl('', Validators['required']),
@@ -75,17 +73,33 @@ export class AddProductComponent implements OnInit, OnDestroy {
         if (this.editFlag == false) {
           this.productService.$products.next([...this.productService.$products.getValue().concat(data)]);
         } else if (this.editFlag == true) {
-          this.productForm.setValue({
-            name: this.productForm.controls['name'].value,
-            type: this.productForm.controls['type'].value,
-            catg: this.productForm.controls['catg'].value,
-            subcatg: this.productForm.controls['subcatg'].value,
-            ref: this.productForm.controls['ref'].value,
-            password: this.productForm.controls['password'].value,
-            fees: this.productForm.controls['fees'].value,
-            fessPercent: this.productForm.controls['fessPercent'].value
+          const productsArray: any[] = this.productService.$products.getValue();
+          productsArray.forEach((res: any, index) => {
+            if (res.name === this.product.name) {
+              console.log('sasa');
+
+              productsArray.splice(index, 1);
+
+
+              this.productForm.setValue({
+                name: this.productForm.controls['name'].value,
+                type: this.productForm.controls['type'].value,
+                catg: this.productForm.controls['catg'].value,
+                subcatg: this.productForm.controls['subcatg'].value,
+                ref: this.productForm.controls['ref'].value,
+                password: this.productForm.controls['password'].value,
+                fees: this.productForm.controls['fees'].value,
+                fessPercent: this.productForm.controls['fessPercent'].value
+              })
+            }
           })
+          this.productService.$products.next(productsArray.concat(this.productForm.value));
+
+          console.log(productsArray);
+
         }
+
+
         this.toastr.success('Changes saved successfully');
         this.router.navigateByUrl('');
       }

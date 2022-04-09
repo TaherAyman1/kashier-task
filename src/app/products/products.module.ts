@@ -4,9 +4,9 @@ import { CommonModule } from '@angular/common';
 
 import { ProductsRoutingModule } from './products-routing.module';
 import { AllProductsComponent } from './all-products/all-products.component';
-import { AddProductComponent } from './add-product/add-product.component';
 import { MaterialModule } from '../material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AddEditProductComponent } from './add-edit-product/add-edit-product.component';
 
 
 
@@ -14,8 +14,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AllProductsComponent,
-    AddProductComponent,
     ProductLandingComponent,
+    AddEditProductComponent,
   ],
   imports: [
     CommonModule,
