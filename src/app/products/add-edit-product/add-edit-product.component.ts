@@ -76,7 +76,6 @@ export class AddEditProductComponent implements OnInit, OnDestroy {
           const productsArray: any[] = this.productService.$products.getValue();
           productsArray.forEach((res: any, index) => {
             if (res.name === this.product.name) {
-              console.log('sasa');
 
               productsArray.splice(index, 1);
 
